@@ -1,32 +1,22 @@
+OPEN PORTS:
 
-Open Ports
+22 OpenSSH 8.2p1;
+80 Apache httpd 2.4.41;
+139 Samba smbd 4.6.2;
+445 Samba smbd 4.6.2;
 
-22 OpenSSH 8.2p1
+ENUMERATION:
 
-80 Apache httpd 2.4.41
+When we access the webserver we are provided with a login screen.
+Feroxbuster finds a cloud directory. 
+It's an image upload website that of course accepts only image files. 
+But it's possible to bypass this restriction by adding a space after the extension of the file that you want to upload. 
+If you want to upload a php-reverse-shell.php just put php-reverse-shell.php#.png and the file will upload successfully.
 
-139 Samba smbd 4.6.2
-
-445 Samba smbd 4.6.2
-
-Enumeration
-
-When we access the webserver we are provided with a login screen
-
-Feroxbuster finds a cloud directory
-
-It's an image upload website that of course accepts only image files
-
-But it's possible to bypass this restriction by adding a space after the extension of the file that you want to upload
-
-If you want to upload a shell.php just put shell.php .jpg and the file will upload successfully
-
-Privilege escalation
+PRIVILEGE SCALATION:
 
 In the opt directory there is a dataset.kdbx file
-
 It's a Keepass password database
-
 We can extract the hash:
 
 keepass2john dataset.kdbx > forjohn.txt
@@ -52,3 +42,4 @@ Now we can open the database and we will find the password for the user sysadmin
 We now have access to the scripts directory
 
 This is the script.php file:
+
